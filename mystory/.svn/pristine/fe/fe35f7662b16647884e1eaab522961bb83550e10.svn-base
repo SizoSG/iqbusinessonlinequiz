@@ -1,0 +1,38 @@
+/*
+ * To change this license header, choose License Headers in Project Properties.
+ * To change this template file, choose Tools | Templates
+ * and open the template in the editor.
+ */
+package za.co.sita.quiz.dto;
+
+/**
+ *
+ * @author sizog
+ */
+public class RightAndWrong  extends Uploadquestion {
+   
+    
+    private int userAnswer;
+    private String quiz_name;
+
+    public String getQuiz_name() {
+        return quiz_name;
+    }
+
+    public void setQuiz_name(String quiz_name) {
+        this.quiz_name = quiz_name;
+    }
+    
+    
+    
+
+    public int getUserAnswer() {
+        return userAnswer;
+    }
+
+    public void setUserAnswer(int userAnswer) {
+        this.userAnswer = userAnswer;
+    }
+    
+    
+}

@@ -1,0 +1,12 @@
+package za.co.sita.util.objw;
+
+public class Q7
+{
+ 
+  private String Answer;
+
+  public String getAnswer() { return this.Answer; }
+
+  public void setCorrectAnswer(String Answer) { this.Answer = Answer; }
+  
+}

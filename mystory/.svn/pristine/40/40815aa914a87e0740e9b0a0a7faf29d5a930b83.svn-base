@@ -1,0 +1,37 @@
+
+<ng-form name="quizNameForm">
+    <div class="container">
+        <header>
+            <h1>Oline<span>Quiz Rules</span></h1>
+            <nav class="codrops-demos">
+                <br>
+                </br>
+                <br>
+                </br>
+                <br>
+                <span><strong>Select the Quiz</strong></span>
+                </br>
+                <br>
+                <div class="form-group ">
+
+                    <select ng-model="selectQuiz"  ng-options="x as x.quiz_name +   ' ' +   x.quiz_id for x in list">
+                    </select>
+                </div>
+                </br>
+                <br>
+                </br>
+                <br>
+                </br>
+                <br>
+            </nav> 
+        </header>
+    </div>
+    <div style="overflow:auto;">
+        <div style="float:right;">
+            <button type="button" ng-click="showPage('index');">Cancel</button>
+            <button ng-click="getSelectedQuiz()" > Proceed</button>
+
+        </div>
+    </div>
+
+</ng-form>

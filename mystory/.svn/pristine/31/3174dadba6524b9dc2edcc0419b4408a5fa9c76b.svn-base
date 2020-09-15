@@ -1,0 +1,100 @@
+package za.co.sita.quiz.dto;
+
+import java.io.Serializable;
+
+
+
+/**
+ * The persistent class for the uploadquestions database table.
+ * 
+ */
+
+public class Uploadquestion implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+
+	private int questionId;
+
+	private String actual_question;
+
+	private String choice1;
+
+	private String choice2;
+
+	private String choice3;
+
+	private String choice4;
+
+	private String correct_Answer;
+
+	private int  quiz_id;
+
+	public Uploadquestion() {
+	}
+
+	public int getQuestionId() {
+		return this.questionId;
+	}
+
+	public void setQuestionId(int questionId) {
+		this.questionId = questionId;
+	}
+
+
+	public String getChoice1() {
+		return this.choice1;
+	}
+
+	public void setChoice1(String choice1) {
+		this.choice1 = choice1;
+	}
+
+	public String getChoice2() {
+		return this.choice2;
+	}
+
+	public void setChoice2(String choice2) {
+		this.choice2 = choice2;
+	}
+
+	public String getChoice3() {
+		return this.choice3;
+	}
+
+	public void setChoice3(String choice3) {
+		this.choice3 = choice3;
+	}
+
+	public String getChoice4() {
+		return this.choice4;
+	}
+
+	public void setChoice4(String choice4) {
+		this.choice4 = choice4;
+	}
+
+	public String getCorrect_Answer() {
+		return this.correct_Answer;
+	}
+
+	public void setCorrect_Answer(String correct_Answer) {
+		this.correct_Answer = correct_Answer;
+	}
+
+	public int getQuiz_id() {
+		return this.quiz_id;
+	}
+
+	public void setQuiz_id(int quiz_id) {
+		this.quiz_id = quiz_id;
+	}
+
+	public String getActual_question() {
+		return actual_question;
+	}
+
+	public void setActual_question(String actual_question) {
+		this.actual_question = actual_question;
+	}
+
+}

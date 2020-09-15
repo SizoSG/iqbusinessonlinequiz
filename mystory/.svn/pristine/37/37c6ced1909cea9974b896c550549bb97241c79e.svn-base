@@ -1,0 +1,51 @@
+package za.co.sita.util.obj;
+
+public class Q6
+{
+  private transient int question_id;
+
+    public int getQuestion_id() {
+        return question_id;
+    }
+
+    public void setQuestion_id(int question_id) {
+        this.question_id = question_id;
+    }
+    
+  private String actualQuestioin;
+
+  public String getActualQuestioin() { return this.actualQuestioin; }
+
+  public void setActualQuestioin(String actualQuestioin) { this.actualQuestioin = actualQuestioin; }
+
+  private String a;
+
+  public String getA() { return this.a; }
+
+  public void setA(String a) { this.a = a; }
+
+  private String b;
+
+  public String getB() { return this.b; }
+
+  public void setB(String b) { this.b = b; }
+
+  private String c;
+
+  public String getC() { return this.c; }
+
+  public void setC(String c) { this.c = c; }
+
+  private String d;
+
+  public String getD() { return this.d; }
+
+  public void setD(String d) { this.d = d; }
+
+  private String correctAnswer;
+
+  public String getCorrectAnswer() { return this.correctAnswer; }
+
+  public void setCorrectAnswer(String correctAnswer) { this.correctAnswer = correctAnswer; }
+  
+}

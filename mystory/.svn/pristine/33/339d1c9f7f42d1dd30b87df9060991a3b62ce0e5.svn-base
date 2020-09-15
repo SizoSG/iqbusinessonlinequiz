@@ -1,0 +1,76 @@
+package za.co.sita.util.objw;
+
+import org.codehaus.jackson.map.annotate.JsonSerialize;
+
+@JsonSerialize(include=JsonSerialize.Inclusion.NON_NULL)
+public class AnswersRoot {
+	private int quiz_id;
+	
+	  private Q1 qn1;
+
+	  public Q1 getQn1() { return this.qn1; }
+
+	  public void setQn1(Q1 qn1) { this.qn1 = qn1; }
+
+	  private Q2 qn2;
+
+	  public Q2 getQn2() { return this.qn2; }
+
+	  public void setQn2(Q2 qn2) { this.qn2 = qn2; }
+
+	  private Q3 qn3;
+
+	  public Q3 getQn3() { return this.qn3; }
+
+	  public void setQn3(Q3 qn3) { this.qn3 = qn3; }
+
+	  private Q4 qn4;
+
+	  public Q4 getQn4() { return this.qn4; }
+
+	  public void setQn4(Q4 qn4) { this.qn4 = qn4; }
+
+	  private Q5 qn5;
+
+	  public Q5 getQn5() { return this.qn5; }
+
+	  public void setQn5(Q5 qn5) { this.qn5 = qn5; }
+
+	  private Q6 qn6;
+
+	  public Q6 getQn6() { return this.qn6; }
+
+	  public void setQn6(Q6 qn6) { this.qn6 = qn6; }
+
+	  private Q7 qn7;
+
+	  public Q7 getQn7() { return this.qn7; }
+
+	  public void setQn7(Q7 qn7) { this.qn7 = qn7; }
+
+	  private Q8 qn8;
+
+	  public Q8 getQn8() { return this.qn8; }
+
+	  public void setQn8(Q8 qn8) { this.qn8 = qn8; }
+
+	  private Q9 qn9;
+
+	  public Q9 getQn9() { return this.qn9; }
+
+	  public void setQn9(Q9 qn9) { this.qn9 = qn9; }
+
+	  private Q10 qn10;
+
+	  public Q10 getQn10() { return this.qn10; }
+
+	  public void setQn10(Q10 qn10) { this.qn10 = qn10; }
+
+	public int getQuiz_id() {
+		return quiz_id;
+	}
+
+	public void setQuiz_id(int quiz_id) {
+		this.quiz_id = quiz_id;
+	}
+	}

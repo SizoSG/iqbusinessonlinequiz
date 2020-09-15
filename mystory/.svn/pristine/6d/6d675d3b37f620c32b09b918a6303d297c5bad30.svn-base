@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Reset Password (User)</title>
+  <!-- Bootstrap core CSS-->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet">
+</head>
+
+<body class="bg-dark">
+  <div class="container">
+    <div class="card card-login mx-auto mt-5">
+      <div class="card-header">Reset Password</div>
+      <div class="card-body">
+        <div class="text-center mt-4 mb-5">
+          <h4>Forgot your password?</h4>
+          <p>Enter your email address and we will send you instructions on how to reset your password.</p>
+        </div>
+        <form>
+          <div class="form-group">
+            <input class="form-control" id="exampleInputEmail1" type="email" required="required" aria-describedby="emailHelp" type="email" placeholder="Enter email address">
+          </div>
+          <a class="btn btn-primary btn-block" onclick="myFunction" href="login.html">Reset Password</a>
+        </form>
+        <div class="text-center">
+          <a class="d-block small mt-3" href="index.html#toregister">Register an Account</a>
+          <a class="d-block small" href="index.html">Login Page</a>
+        </div>
+      </div>
+    </div>
+  </div>
+  <!-- Bootstrap core JavaScript-->
+  <script src="vendor/jquery/jquery.min.js"></script>
+  <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+   <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <!-- Core plugin JavaScript-->
+  <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+</body>
+
+
+
+
+<script>
+function myFunction() {
+    document.getElementById("regForm").submit();
+}
+
+//Array creation
+
+(function ($) {
+    $.fn.serializeFormJSON = function () {
+
+        var o = {};
+        var a = this.serializeArray();
+        $.each(a, function () {
+            if (o[this.name]) {
+                if (!o[this.name].push) {
+                    o[this.name] = [o[this.name]];
+                }
+                o[this.name].push(this.value || '');
+            } else {
+                o[this.name] = this.value || '';
+            }
+        });
+        return o;
+    };
+})(jQuery);
+
+$('form').submit(function (e) {
+    e.preventDefault();
+    var data = $(this).serializeFormJSON();
+    console.log(data);
+
+
+});
+
+
+
+
+
+</script>
+
+</html>

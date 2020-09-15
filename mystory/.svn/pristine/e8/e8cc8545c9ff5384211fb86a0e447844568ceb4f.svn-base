@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8 lt8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="UTF-8" />
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
+        <title>Registration Form</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta name="description"
+              content="Login and Registration Form with HTML5 and CSS3" />
+        <meta name="keywords"
+              content="html5, css3, form, switch, animation, :target, pseudo-class" />
+        <meta name="author" content="Codrops" />
+        <script
+        src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+        <script
+        src="https://ajax.googleapis.com/ajax/libs/angularjs/1.6.4/angular.min.js"></script>
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+        <link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+        <script src="js/script.js"></script>
+        <script src="js/service.js"></script>
+    </head>
+    <body>
+        <div class="container">
+            <header>
+
+                <h1>Oline<span>Quiz</span></h1>
+                <nav class="codrops-demos">
+                 
+
+                </nav>
+            </header>
+
+            <section>				
+                <div id="container_demo" >
+                    <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+
+                    <div id="wrapper">
+                        <div id="login" class="animate form">
+                            <form  autocomplete="on"  id="registerform"
+                                   ng-app="myApp" ng-controller="appCtrl"> 
+                                <div class="alert alert-danger" role="alert" ng-show="message1">
+                      
+                                </div>  
+                                <ng-form name="regForm">
+                                    <h1>Sign up</h1>
+                                    <p>
+                                        <label for="namesignup" class="uname" data-icon="u">
+                                            Your Name</label> <input 
+                                            required="required" type="text" placeholder="myname"
+                                            ng-model="user.name" />
+                                    </p>
+
+                                    <p>
+                                        <label for="surnamesignup" class="uname" data-icon="u">
+                                            Your Surname</label> <input 
+                                            required="required" type="text" placeholder="mysurname"
+                                            ng-model="user.surname" />
+                                    </p>
+
+                                    <p>
+                                        <label for="emailsignup" class="youmail" data-icon="e">
+                                            Your Email</label> <input 
+                                            required="required" type="email"
+                                            placeholder="mymail@sita.co.za" ng-model="user.email" />
+                                    </p>
+
+                                    <p>
+                                        <label for="usernamesignup" class="uname" data-icon="#">Your
+                                            Employee Number</label> <input 
+                                            required="required" type="text" placeholder="Employee Number"
+                                            ng-model="user.employeenumber" />
+                                    </p>
+
+                                    <p>
+                                        <label  for="passwordsignup" class="youpasswd" data-icon="p">Your
+                                            Password </label> <input id="password"
+                                                                 required="required" type="password" placeholder="eg. X8df!90EO"
+                                                                 ng-model="user.password"  />
+                                    </p>
+
+                                    <p>
+                                        <label for="passwordsignup_confirm" class="youpasswd"
+                                               data-icon="p">Please confirm your password </label> <input
+                                               id="confirmmypassword"  type="password" required placeholder="eg. X8df!90EO"
+                                               ng-model="user.confirmmypassword" />
+
+                                    </p>     
+
+                                    <label ng-show="user.password != user.confirmmypassword">Passwords do not match...</label>
+
+                                    <p class="signin button">
+                                        <input type="submit" value="Sign up" ng-if="user.password === user.confirmmypassword" ng-click="register()" />
+                                    </p>
+                                    <p class="change_link">
+                                        Already a member ? <a ng-click="showPage('login');" class="to_register">
+                                            Go and log in </a>
+                                    </p>
+
+
+                                </ng-form>
+
+                            </form>
+
+                        </div>
+                    </div>  
+            </section>
+        </div>
+    </body>
+
+
+
+
+
+
+
+
+
+
+
+
+</html>

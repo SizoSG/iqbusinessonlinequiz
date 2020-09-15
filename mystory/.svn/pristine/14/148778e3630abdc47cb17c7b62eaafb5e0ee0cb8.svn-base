@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]> <html lang="en" class="no-js ie6 lt8"> <![endif]-->
+<!--[if IE 7 ]>    <html lang="en" class="no-js ie7 lt8"> <![endif]-->
+<!--[if IE 8 ]>    <html lang="en" class="no-js ie8 lt8"> <![endif]-->
+<!--[if IE 9 ]>    <html lang="en" class="no-js ie9"> <![endif]-->
+<!--[if (gt IE 9)|!(IE)]><!--> <html lang="en" class="no-js"> <!--<![endif]-->
+    <head>
+        <meta charset="UTF-8" />
+        <!-- <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">  -->
+        <title>Take Quiz</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0"> 
+        <meta name="description" content="Quiz Rules" />
+        <meta name="keywords" content="html5, css3, form, switch, animation, :target, pseudo-class" />
+        <meta name="author" content="Codrops" />
+        <link rel="shortcut icon" href="../favicon.ico"> 
+        <link rel="stylesheet" type="text/css" href="css/demo.css" />
+        <link rel="stylesheet" type="text/css" href="css/style.css" />
+		<link rel="stylesheet" type="text/css" href="css/animate-custom.css" />
+    </head>
+    
+
+
+    <body>
+        <div class="container">
+            <header>      
+				<nav class="codrops-demos">
+					<span>Add Question and Select The<strong>"Best"</strong>Answer</span>
+
+<br>
+</br>
+                              <br>
+                              </br>
+                              <br>
+                              					
+                                <textarea rows="8" cols="120" ></textarea>
+
+                              <br>
+                              </br>
+                              <br>
+
+                                <div class="container">
+                               <ul class="list">
+                                <li class="list__item">
+                                 <input type="radio" class="radio-btn" name="choise" id="a-opt" />
+                                 <label for="a-opt" class="label"><input type="text" name="a" size="60"></label>
+                                </li>
+                                <li class="list__item">
+                                 <input type="radio" class="radio-btn" name="choise" id="b-opt" />
+                                 <label for="b-opt" class="label"><input type="text" name="b" size="60"></label>
+                                </li>
+                                <li class="list__item">
+                                 <input type="radio" class="radio-btn" name="choise" id="c-opt" />
+                                 <label for="c-opt" class="label"><input type="text" name="c" size="60"></label>
+                                </li>
+                                <li class="list__item">
+                                 <input type="radio" class="radio-btn" name="choise" id="d-opt" />
+                                 <label for="d-opt" class="label"><input type="text" name="d" size="60"></label>
+                                </li>
+                               </ul>
+                              </div>
+                                
+
+                              <br>
+                              </br>
+
+                              <br>
+
+
+                                    <a href="admindashboard.html" class="button1">Back</a>
+                                    <a href="#" class="button1">Next>></a>
+
+				</nav>
+            </header>
+        </div>
+    </body>
+</html>

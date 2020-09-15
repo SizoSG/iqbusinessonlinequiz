@@ -1,0 +1,133 @@
+package za.co.sita.dao;
+
+
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+
+import za.co.sita.quiz.dto.CorrectAnswers;
+import za.co.sita.util.MyConnect;
+
+public class CorrectAnswersDAO {
+	
+	
+	
+	public static void  main(String[] asss) {
+		
+		CorrectAnswersDAO mmmm =  new CorrectAnswersDAO();
+		
+		//CorrectAnswers add = new CorrectAnswers();
+		CorrectAnswers update = new CorrectAnswers();
+	
+		
+		//add.setQuiz_id(1);
+	//	add.setQuestion_id(1);
+		//add.setAnswer("Looseer");
+		
+		update.setAnswer("ssss");
+		update.setQuestion_id(1);
+		
+		mmmm.update(update);
+		//mmmm.insert(add);
+		
+	}
+	
+	
+	
+//=========================================EXECUTE INSERT========================================================	
+	public int insert(CorrectAnswers correctAnswers) {
+		
+		try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("INSERT INTO correct_answers(quiz_id, question_id, answer) VALUES (?,?,?)");
+			stmt.setInt(1, correctAnswers.getQuiz_id());
+			stmt.setInt(2,correctAnswers.getQuestion_id());
+			stmt.setString(3, correctAnswers.getAnswer());
+		
+			 return stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		
+		return 0;
+	}
+		
+		
+	
+	//=========================================EXECUTE UPDATE======================================================	
+	
+public int update(CorrectAnswers correctAnswers) {
+		
+		try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("UPDATE correct_answers SET answer=? WHERE question_id=?");
+			
+			stmt.setString(1, correctAnswers.getAnswer());
+			stmt.setInt(2, correctAnswers.getQuestion_id());
+			
+			
+			
+			return stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+
+		return 0;
+			
+		
+	}
+
+//=========================================EXECUTE SELECT======================================================	
+
+
+	public int select(CorrectAnswers correctAnswers) {
+		
+		try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("SELECT* FROM correct_answers");
+			
+			return stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+
+		return 0;
+			
+		
+	}
+	
+	
+	//=========================================EXECUTE DELETE======================================================
+	
+	public int delete(CorrectAnswers correctAnswers) {
+		
+		try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("DELETE FROM correct_answers WHERE quiz_id=?");
+			
+			stmt.setInt(1, correctAnswers.getQuiz_id());
+	
+			
+			return stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+
+		return 0;
+			
+		
+	}
+
+
+}
+
+
+

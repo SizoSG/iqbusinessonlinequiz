@@ -1,0 +1,56 @@
+package za.co.sita.quiz.dto;
+
+import java.io.Serializable;
+
+
+
+/**
+ * The persistent class for the results database table.
+ * 
+ */
+
+public class Result implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+
+	private int quiz_id;
+        
+        
+        private String employee_number;
+
+	private int score;
+
+
+	public Result() {
+	}
+
+    public int getQuiz_id() {
+        return quiz_id;
+    }
+
+    public void setQuiz_id(int quiz_id) {
+        this.quiz_id = quiz_id;
+    }
+
+    public String getEmployee_number() {
+        return employee_number;
+    }
+
+    public void setEmployee_number(String employee_number) {
+        this.employee_number = employee_number;
+    }
+
+	
+
+	  
+
+	public int getScore() {
+		return this.score;
+	}
+
+	public void setScore(int score) {
+		this.score = score;
+	}
+
+	
+}

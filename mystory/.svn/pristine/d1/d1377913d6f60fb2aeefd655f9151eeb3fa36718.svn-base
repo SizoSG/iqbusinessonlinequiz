@@ -1,0 +1,60 @@
+<ng-form name="quizNameForm">
+    <div class="container">
+        <header>
+            <h1>Oline<span>Quiz Rules</span></h1>
+            <nav class="codrops-demos">
+
+                <br>
+                </br>
+                <br>
+                </br>
+                <br>
+                <span><strong>Quiz Rules</strong></span>
+                </br>
+
+                <br>
+
+                <div class="form-group ">
+
+                                  <br>
+                    </br>
+                    <br>
+                    </br>
+                    <br>
+					<span>1 .<strong>You need to score 50% or above to pass.</strong></span>
+                    </br>
+
+                    <br>
+                    <span>2. <strong>If you fail this quiz, you cannot rewrite.</strong></span>
+                    </br>
+                      
+                    <br>
+                    <span>3. <strong>You can go back to a previous question.</strong></span>
+                    </br>
+<br>
+</br>
+<br>
+</br>
+
+                </div>
+
+
+                </br>
+
+                <br>
+                </br>
+                <br>
+                </br>
+                <br>
+
+            </nav> 
+        </header>
+    </div>
+    <div style="overflow:auto;">
+        <div style="float:right;">
+            <button type="button" ng-click="showPage('selectQuiz');">Cancel</button>
+            <button  ng-click="showPage('writequiz2');"> Proceed</button>
+        </div>
+    </div>
+
+</ng-form>

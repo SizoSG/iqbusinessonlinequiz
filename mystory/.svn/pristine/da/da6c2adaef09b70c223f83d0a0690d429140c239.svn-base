@@ -1,0 +1,803 @@
+package za.co.sita.service;
+
+import java.util.List;
+import javax.annotation.Resource;
+import javax.enterprise.context.RequestScoped;
+import javax.transaction.UserTransaction;
+import javax.ws.rs.Consumes;
+import javax.ws.rs.DELETE;
+import javax.ws.rs.GET;
+import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+import javax.ws.rs.Produces;
+import javax.ws.rs.core.MediaType;
+
+import za.co.sita.dao.CorrectAnswersDAO;
+import za.co.sita.dao.QuizzeDAO;
+import za.co.sita.dao.ResultDAO;
+import za.co.sita.dao.UploadquestionDAO;
+import za.co.sita.dao.UserDAO;
+import za.co.sita.dao.Writer_sAnswerDAO;
+
+import za.co.sita.quiz.dto.CorrectAnswers;
+import za.co.sita.quiz.dto.Quizze;
+import za.co.sita.quiz.dto.Result;
+import za.co.sita.quiz.dto.Uploadquestion;
+import za.co.sita.quiz.dto.User;
+import za.co.sita.quiz.dto.Writer_sAnswer;
+import za.co.sita.util.obj.Q1;
+import za.co.sita.util.obj.Q10;
+import za.co.sita.util.obj.Q2;
+import za.co.sita.util.obj.Q3;
+import za.co.sita.util.obj.Q4;
+import za.co.sita.util.obj.Q5;
+import za.co.sita.util.obj.Q6;
+import za.co.sita.util.obj.Q7;
+import za.co.sita.util.obj.Q8;
+import za.co.sita.util.obj.Q9;
+import za.co.sita.util.obj.QuestionsRoot;
+import za.co.sita.util.objw.AnswersRoot;
+
+@Path("/quiz")
+@RequestScoped
+public class QuizService {
+
+    @Resource
+    UserTransaction utx;
+
+//=============================================Services for Correct Answer============================================	 
+    @GET
+    @Path("/getCorrectAnswers/" + "{empno}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public CorrectAnswers getCorrectAnswers(@PathParam("empno") String empno) {
+        CorrectAnswersDAO dao = new CorrectAnswersDAO();
+
+        return null;
+
+    }
+
+    @POST
+    @Path("/saveCorrectAnswers/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int saveCorrectAnswers(CorrectAnswers correctAnswers) {
+
+        CorrectAnswersDAO dao = new CorrectAnswersDAO();
+
+        return 0;
+    }
+
+    @PUT
+    @Path("/saveCorrectAnswers/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int updateCorrectAnswers(CorrectAnswers correctAnswers) {
+        CorrectAnswersDAO dao = new CorrectAnswersDAO();
+
+        return 0;
+
+    }
+
+//=============================================Services for Quizzes===================================================
+    @GET
+    @Path("/getQuizze/" + "{empno}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Quizze getQuizze(@PathParam("empno") String empno) {
+        QuizzeDAO dao = new QuizzeDAO();
+
+        return null;
+
+    }
+    
+     @GET
+    @Path("/getQuizzeList/"+ "{empno}")
+    @Produces(MediaType.APPLICATION_JSON)
+    @Consumes(MediaType.APPLICATION_JSON)
+    public List<Quizze> getAllQuizzes(@PathParam("empno") String empno) {
+        QuizzeDAO dao = new QuizzeDAO();
+        return dao.getallquizzes(empno);
+    }
+    
+      @GET
+    @Path("/getQuizzeList/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Quizze> getAllQuizzes() {
+        QuizzeDAO dao = new QuizzeDAO();
+        return dao.getallquizzes();
+    }
+
+    @POST
+    @Path("/saveQuizze/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public Quizze saveQuizze(Quizze quizze) {
+        System.out.println("This is it");
+        QuizzeDAO dao = new QuizzeDAO();
+        return dao.insert(quizze);
+    }
+
+    @PUT
+    @Path("/saveQuizze111/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int updateQuizze(Quizze quizze) {
+        QuizzeDAO dao = new QuizzeDAO();
+
+        return 0;
+    }
+
+//=============================================Services for Resulst==========================================
+    @GET
+    @Path("/getResult/" + "{empno}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Result getResult(@PathParam("empno") String empno) {
+        ResultDAO dao = new ResultDAO();
+
+        return null;
+
+    }
+    
+    
+     @GET
+    @Path("/getAllResult/")
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Result> getAllResult() {
+        ResultDAO dao = new ResultDAO();
+
+        return dao.getAllResults();
+
+    }
+    
+    
+
+    @POST
+    @Path("/saveResult/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int saveResult(Result result) {
+
+        ResultDAO dao = new ResultDAO();
+
+        return 0;
+    }
+
+    @PUT
+    @Path("/saveResult/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int updateResult(Result result) {
+        ResultDAO dao = new ResultDAO();
+
+        return 0;
+
+    }
+
+//=============================================Services for Upload_Questions===========================================
+    @GET
+    @Path("/getUploadquestion/" + "{empno}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Uploadquestion getUploadquestion(@PathParam("empno") String empno) {
+        UploadquestionDAO dao = new UploadquestionDAO();
+
+        return null;
+
+    }
+
+    @POST
+    @Path("/saveUploadquestion/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int saveUploadquestion(QuestionsRoot uploadquestion) {
+
+        UploadquestionDAO dao = new UploadquestionDAO();
+
+        Uploadquestion qu = new Uploadquestion();
+        qu.setQuiz_id(uploadquestion.getQuiz_id());
+        qu.setQuestionId(1);
+        qu.setActual_question(uploadquestion.getQn1().getActualQuestioin());
+        qu.setChoice1(uploadquestion.getQn1().getA());
+        qu.setChoice2(uploadquestion.getQn1().getB());
+        qu.setChoice3(uploadquestion.getQn1().getC());
+        qu.setChoice4(uploadquestion.getQn1().getD());
+        qu.setCorrect_Answer(uploadquestion.getQn1().getCorrectAnswer());
+
+        Uploadquestion qu2 = new Uploadquestion();
+       qu2.setQuiz_id(uploadquestion.getQuiz_id());
+        qu2.setQuestionId(2);
+        qu2.setActual_question(uploadquestion.getQn2().getActualQuestioin());
+        qu2.setChoice1(uploadquestion.getQn2().getA());
+        qu2.setChoice2(uploadquestion.getQn2().getB());
+        qu2.setChoice3(uploadquestion.getQn2().getC());
+        qu2.setChoice4(uploadquestion.getQn2().getD());
+        qu2.setCorrect_Answer(uploadquestion.getQn2().getCorrectAnswer());
+
+        Uploadquestion qu3 = new Uploadquestion();
+       qu3.setQuiz_id(uploadquestion.getQuiz_id());
+        qu3.setQuestionId(3);
+        qu3.setActual_question(uploadquestion.getQn3().getActualQuestioin());
+        qu3.setChoice1(uploadquestion.getQn3().getA());
+        qu3.setChoice2(uploadquestion.getQn3().getB());
+        qu3.setChoice3(uploadquestion.getQn3().getC());
+        qu3.setChoice4(uploadquestion.getQn3().getD());
+        qu3.setCorrect_Answer(uploadquestion.getQn3().getCorrectAnswer());
+
+        Uploadquestion qu4 = new Uploadquestion();
+       qu4.setQuiz_id(uploadquestion.getQuiz_id());
+       qu4.setQuestionId(4);
+        qu4.setActual_question(uploadquestion.getQn4().getActualQuestioin());
+        qu4.setChoice1(uploadquestion.getQn4().getA());
+        qu4.setChoice2(uploadquestion.getQn4().getB());
+        qu4.setChoice3(uploadquestion.getQn4().getC());
+        qu4.setChoice4(uploadquestion.getQn4().getD());
+        qu4.setCorrect_Answer(uploadquestion.getQn4().getCorrectAnswer());
+
+        Uploadquestion qu5 = new Uploadquestion();
+        qu5.setQuiz_id(uploadquestion.getQuiz_id());
+        qu5.setQuestionId(5);
+        qu5.setActual_question(uploadquestion.getQn5().getActualQuestioin());
+        qu5.setChoice1(uploadquestion.getQn5().getA());
+        qu5.setChoice2(uploadquestion.getQn5().getB());
+        qu5.setChoice3(uploadquestion.getQn5().getC());
+        qu5.setChoice4(uploadquestion.getQn5().getD());
+        qu5.setCorrect_Answer(uploadquestion.getQn5().getCorrectAnswer());
+
+        Uploadquestion qu6 = new Uploadquestion();
+       qu6.setQuiz_id(uploadquestion.getQuiz_id());
+       qu6.setQuestionId(6);
+        qu6.setActual_question(uploadquestion.getQn6().getActualQuestioin());
+        qu6.setChoice1(uploadquestion.getQn6().getA());
+        qu6.setChoice2(uploadquestion.getQn6().getB());
+        qu6.setChoice3(uploadquestion.getQn6().getC());
+        qu6.setChoice4(uploadquestion.getQn6().getD());
+        qu6.setCorrect_Answer(uploadquestion.getQn6().getCorrectAnswer());
+
+        Uploadquestion qu7 = new Uploadquestion();
+        qu7.setQuiz_id(uploadquestion.getQuiz_id());
+        qu7.setQuestionId(7);
+        qu7.setActual_question(uploadquestion.getQn7().getActualQuestioin());
+        qu7.setChoice1(uploadquestion.getQn7().getA());
+        qu7.setChoice2(uploadquestion.getQn7().getB());
+        qu7.setChoice3(uploadquestion.getQn7().getC());
+        qu7.setChoice4(uploadquestion.getQn7().getD());
+        qu7.setCorrect_Answer(uploadquestion.getQn7().getCorrectAnswer());
+
+        Uploadquestion qu8 = new Uploadquestion();
+        qu8.setQuiz_id(uploadquestion.getQuiz_id());
+        qu8.setQuestionId(8);
+        qu8.setActual_question(uploadquestion.getQn8().getActualQuestioin());
+        qu8.setChoice1(uploadquestion.getQn8().getA());
+        qu8.setChoice2(uploadquestion.getQn8().getB());
+        qu8.setChoice3(uploadquestion.getQn8().getC());
+        qu8.setChoice4(uploadquestion.getQn8().getD());
+        qu8.setCorrect_Answer(uploadquestion.getQn8().getCorrectAnswer());
+
+        Uploadquestion qu9 = new Uploadquestion();
+        qu9.setQuiz_id(uploadquestion.getQuiz_id());
+        qu9.setQuestionId(9);
+        qu9.setActual_question(uploadquestion.getQn9().getActualQuestioin());
+        qu9.setChoice1(uploadquestion.getQn9().getA());
+        qu9.setChoice2(uploadquestion.getQn9().getB());
+        qu9.setChoice3(uploadquestion.getQn9().getC());
+        qu9.setChoice4(uploadquestion.getQn9().getD());
+        qu9.setCorrect_Answer(uploadquestion.getQn9().getCorrectAnswer());
+
+        Uploadquestion qu10 = new Uploadquestion();
+        qu10.setQuiz_id(uploadquestion.getQuiz_id());
+        qu10.setQuestionId(10);
+        qu10.setActual_question(uploadquestion.getQn10().getActualQuestioin());
+        qu10.setChoice1(uploadquestion.getQn10().getA());
+        qu10.setChoice2(uploadquestion.getQn10().getB());
+        qu10.setChoice3(uploadquestion.getQn10().getC());
+        qu10.setChoice4(uploadquestion.getQn10().getD());
+        qu10.setCorrect_Answer(uploadquestion.getQn10().getCorrectAnswer());
+
+        dao.insert(qu);
+        dao.insert(qu2);
+        dao.insert(qu3);
+        dao.insert(qu4);
+        dao.insert(qu5);
+        dao.insert(qu6);
+        dao.insert(qu7);
+        dao.insert(qu8);
+        dao.insert(qu9);
+        dao.insert(qu10);
+        return 1;
+
+//	System.out.println("You have asked the following  + " + uploadquestion.getQn1().getActualQuestioin());
+//	return 1211111;	
+    }
+
+    @DELETE
+    @Path("/selectUploadquestionTodelete/" + "{quizid}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    public int updateUploadquestion(@PathParam("quizid") String quizid) {
+        UploadquestionDAO dao = new UploadquestionDAO();
+       
+       // System.out.println("SHOW MEhhhhhhhhhhhhh  "+ quizid);
+        Uploadquestion move = new Uploadquestion();
+        int id = Integer.parseInt(quizid);
+        move.setQuiz_id(id);
+        
+        
+        int w = dao.deleteanswer(id);
+         System.out.println("This is  the results Answers   " + w);
+         
+        int i =  dao.delete(move);
+        
+        System.out.println("This is  the results questions   " + i);
+       int j =  dao.deletequiz(id);
+        
+         System.out.println("This is  the results quizz   " + j);
+         
+         
+         return  i ==1 && j == 1 ? 1: 0;
+    }
+    
+    
+    @GET
+    @Path("/getSelectedQuizToViewResultsFor/" + "{quizid}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<Result> viewResults(@PathParam("quizid") String quizid) {
+        ResultDAO dao = new ResultDAO();
+        
+        
+        System.out.println("this is the number  "+ quizid);
+        return dao.getListResults(Integer.parseInt(quizid));
+    }
+    
+    @GET
+    @Path("/viewUsers/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public List<User> viewUsers() {
+        UserDAO dao = new UserDAO();
+        return dao.getUsers();
+    }
+    
+    @GET
+    @Path("/getFailed/" + "{quizid}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON) 
+    public  int getfailed(@PathParam("quizid") String quizid) {
+        ResultDAO dao =  new ResultDAO();
+        return dao.getFailed(Integer.parseInt(quizid));
+        
+        
+    }
+    
+     @GET
+    @Path("/getPassed/" + "{quizid}")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public  int getPassed(@PathParam("quizid") String quizid) {
+        ResultDAO dao =  new ResultDAO();
+        return dao.getPassed(Integer.parseInt(quizid));
+        
+    }
+    
+    
+     @POST
+    @Path("/getResults/" )
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int getResults(QuestionsRoot uploadquestion) {
+       ResultDAO dao =  new ResultDAO();
+       
+        System.out.println("SHOW MEhhhhhhhhhhhhh  "+ uploadquestion.getQuiz_id() + "   " + uploadquestion.getEmployeenumber() );
+        
+
+        int w = dao.getResults(uploadquestion.getQuiz_id(), uploadquestion.getEmployeenumber());
+         System.out.println("This is  the results Answers   " + w);
+         
+          return w * 10;
+    }
+    
+    
+    
+    
+    
+    
+    
+    @POST
+    @Path("/Results/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int Results(QuestionsRoot uploadquestion) {
+        Result result = new Result();
+        result.setEmployee_number(uploadquestion.getEmployeenumber());
+        result.setQuiz_id(uploadquestion.getQuiz_id());
+        
+        ResultDAO dao = new ResultDAO();
+        return dao.insert(result);
+    }
+    
+    
+    @GET
+    @Path("/selectUploadquestion/" + "{quizid}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public QuestionsRoot getUploadquestions(@PathParam("quizid") String quizid) {
+       
+      QuestionsRoot root = new QuestionsRoot();
+      UploadquestionDAO dao = new UploadquestionDAO();
+
+       int  ts =  Integer.parseInt(quizid);
+       root.setQuiz_id(ts);
+       for(Uploadquestion upload :dao.getUploaded(ts)) {
+           if(1 == upload.getQuestionId()){
+            Q1 qn1 = new Q1();  
+            qn1.setQuestion_id(upload.getQuestionId());
+            qn1.setActualQuestioin(upload.getActual_question());
+            qn1.setA(upload.getChoice1());
+            qn1.setB(upload.getChoice2());
+            qn1.setC(upload.getChoice3());
+            qn1.setD(upload.getChoice4());
+       root.setQn1(qn1);
+       
+           }else
+               if(2 == upload.getQuestionId()){
+                 Q2 qn2 = new Q2();
+            qn2.setQuestion_id(upload.getQuestionId());     
+            qn2.setActualQuestioin(upload.getActual_question());
+            qn2.setA(upload.getChoice1());
+            qn2.setB(upload.getChoice2());
+            qn2.setC(upload.getChoice3());
+            qn2.setD(upload.getChoice4());
+       root.setQn2(qn2);  
+               }
+           else
+               if(3 == upload.getQuestionId()){
+                 Q3 qn3 = new Q3(); 
+            qn3.setQuestion_id(upload.getQuestionId());     
+            qn3.setActualQuestioin(upload.getActual_question());
+            qn3.setA(upload.getChoice1());
+            qn3.setB(upload.getChoice2());
+            qn3.setC(upload.getChoice3());
+            qn3.setD(upload.getChoice4());
+       root.setQn3(qn3);  
+               }
+           else
+               if(4 == upload.getQuestionId()){
+                 Q4 qn4 = new Q4();  
+            qn4.setQuestion_id(upload.getQuestionId());    
+            qn4.setActualQuestioin(upload.getActual_question());
+            qn4.setA(upload.getChoice1());
+            qn4.setB(upload.getChoice2());
+            qn4.setC(upload.getChoice3());
+            qn4.setD(upload.getChoice4());
+       root.setQn4(qn4);  
+               }
+           else
+               if(5 == upload.getQuestionId()){
+                 Q5 qn5 = new Q5();
+            qn5.setQuestion_id(upload.getQuestionId());     
+            qn5.setActualQuestioin(upload.getActual_question());
+            qn5.setA(upload.getChoice1());
+            qn5.setB(upload.getChoice2());
+            qn5.setC(upload.getChoice3());
+            qn5.setD(upload.getChoice4());
+       root.setQn5(qn5);  
+               }
+          else
+               if(6 == upload.getQuestionId()){
+                 Q6 qn6 = new Q6(); 
+            qn6.setQuestion_id(upload.getQuestionId());     
+            qn6.setActualQuestioin(upload.getActual_question());
+            qn6.setA(upload.getChoice1());
+            qn6.setB(upload.getChoice2());
+            qn6.setC(upload.getChoice3());
+            qn6.setD(upload.getChoice4());
+       root.setQn6(qn6);  
+               }
+           else
+               if(7 == upload.getQuestionId()){
+                 Q7 qn7 = new Q7(); 
+            qn7.setQuestion_id(upload.getQuestionId());     
+            qn7.setActualQuestioin(upload.getActual_question());
+            qn7.setA(upload.getChoice1());
+            qn7.setB(upload.getChoice2());
+            qn7.setC(upload.getChoice3());
+            qn7.setD(upload.getChoice4());
+       root.setQn7(qn7);  
+               }
+           else
+               if(8 == upload.getQuestionId()){
+                 Q8 qn8 = new Q8(); 
+            qn8.setQuestion_id(upload.getQuestionId());     
+            qn8.setActualQuestioin(upload.getActual_question());
+            qn8.setA(upload.getChoice1());
+            qn8.setB(upload.getChoice2());
+            qn8.setC(upload.getChoice3());
+            qn8.setD(upload.getChoice4());
+       root.setQn8(qn8);  
+               }
+           else
+               if(9 == upload.getQuestionId()){
+                 Q9 qn9 = new Q9();  
+            qn9.setQuestion_id(upload.getQuestionId());     
+            qn9.setActualQuestioin(upload.getActual_question());
+            qn9.setA(upload.getChoice1());
+            qn9.setB(upload.getChoice2());
+            qn9.setC(upload.getChoice3());
+            qn9.setD(upload.getChoice4());
+       root.setQn9(qn9);  
+               }
+           else
+               if(10 == upload.getQuestionId()){
+                 Q10 qn10 = new Q10(); 
+            qn10.setQuestion_id(upload.getQuestionId());     
+            qn10.setActualQuestioin(upload.getActual_question());
+            qn10.setA(upload.getChoice1());
+            qn10.setB(upload.getChoice2());
+            qn10.setC(upload.getChoice3());
+            qn10.setD(upload.getChoice4());
+       root.setQn10(qn10);  
+               }
+       }
+       return root;
+    }
+    
+    
+    
+    @GET
+    @Path("/selectUploadquestion/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public QuestionsRoot selectUploadquestion(QuestionsRoot uploadquestion) {
+
+        int i = 1;
+        UploadquestionDAO dao = new UploadquestionDAO();
+        
+        return null;
+        
+        
+        
+    }
+    
+    
+    
+
+//=============================================Services for Users=====================================================
+    @GET
+    @Path("/getUser/" + "{empno}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public User getUser(@PathParam("empno") String empno) {
+        UserDAO dao = new UserDAO();
+
+        return null;
+
+    }
+    
+    
+
+    @POST
+    @Path("/register/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int register(User user) {
+
+        UserDAO dao = new UserDAO();
+
+        return dao.insert(user);
+    }
+
+    @PUT
+    @Path("/saveUser122111/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public int updateAdmin(User user) {
+        UserDAO dao = new UserDAO();
+
+        return 0;
+
+    }
+
+    @POST
+    @Path("/login/")
+    @Consumes(MediaType.APPLICATION_JSON)
+    @Produces(MediaType.APPLICATION_JSON)
+    public User login(User user) {
+        UserDAO dao = new UserDAO();
+
+        return dao.select(user);
+
+    }
+
+//=============================================Services for Writer's Answer============================================
+    @GET
+    @Path("/getWriter_sAnswer/" + "{empno}")
+    @Produces(MediaType.APPLICATION_JSON)
+    public Writer_sAnswer getWriter_sAnswer(@PathParam("empno") String empno) {
+        Writer_sAnswerDAO dao = new Writer_sAnswerDAO();
+
+        return null;
+
+    }
+
+  	 
+@POST
+@Path("/saveWriter_sAnswer/")
+@Consumes(MediaType.APPLICATION_JSON)
+@Produces(MediaType.APPLICATION_JSON)
+public int saveWriter_sAnswer(QuestionsRoot uploadquestion) {
+	 
+	Writer_sAnswerDAO dao = new Writer_sAnswerDAO(); 
+      
+        Writer_sAnswer ws = new Writer_sAnswer();
+        
+        ws.setEmployeenumber(uploadquestion.getEmployeenumber());
+        ws.setQuestion_id(uploadquestion.getQn1().getQuestion_id());
+        ws.setQuiz_id(uploadquestion.getQuiz_id());
+        ws.setAnswer(uploadquestion.getQn1().getCorrectAnswer());
+        
+        dao.insert(ws);
+        
+         Writer_sAnswer ws1 = new Writer_sAnswer();
+        
+        ws1.setEmployeenumber(uploadquestion.getEmployeenumber());
+        ws1.setQuestion_id(uploadquestion.getQn2().getQuestion_id());
+        ws1.setQuiz_id(uploadquestion.getQuiz_id());
+        ws1.setAnswer(uploadquestion.getQn2().getCorrectAnswer());
+        
+        dao.insert(ws1);
+        
+         Writer_sAnswer ws2 = new Writer_sAnswer();
+        
+        ws2.setEmployeenumber(uploadquestion.getEmployeenumber());
+        ws2.setQuestion_id(uploadquestion.getQn3().getQuestion_id());
+        ws2.setQuiz_id(uploadquestion.getQuiz_id());
+        ws2.setAnswer(uploadquestion.getQn3().getCorrectAnswer());
+        
+        dao.insert(ws2);
+        
+         Writer_sAnswer ws3 = new Writer_sAnswer();
+        
+        ws3.setEmployeenumber(uploadquestion.getEmployeenumber());
+        ws3.setQuestion_id(uploadquestion.getQn4().getQuestion_id());
+        ws3.setQuiz_id(uploadquestion.getQuiz_id());
+        ws3.setAnswer(uploadquestion.getQn4().getCorrectAnswer());
+       
+        dao.insert(ws3);
+        
+         Writer_sAnswer ws4 = new Writer_sAnswer();
+        
+        ws4.setEmployeenumber(uploadquestion.getEmployeenumber());
+        ws4.setQuestion_id(uploadquestion.getQn5().getQuestion_id());
+        ws4.setQuiz_id(uploadquestion.getQuiz_id());
+        ws4.setAnswer(uploadquestion.getQn5().getCorrectAnswer());
+        
+        dao.insert(ws4);
+        
+         Writer_sAnswer ws5 = new Writer_sAnswer();
+        
+        ws5.setEmployeenumber(uploadquestion.getEmployeenumber());
+        ws5.setQuestion_id(uploadquestion.getQn6().getQuestion_id());
+        ws5.setQuiz_id(uploadquestion.getQuiz_id());
+        ws5.setAnswer(uploadquestion.getQn6().getCorrectAnswer());
+        
+        dao.insert(ws5);
+        
+         Writer_sAnswer ws6 = new Writer_sAnswer();
+        
+        ws6.setEmployeenumber(uploadquestion.getEmployeenumber());
+        ws6.setQuestion_id(uploadquestion.getQn7().getQuestion_id());
+        ws6.setQuiz_id(uploadquestion.getQuiz_id());
+        ws6.setAnswer(uploadquestion.getQn7().getCorrectAnswer());
+        
+        dao.insert(ws6);
+        
+         Writer_sAnswer ws7 = new Writer_sAnswer();
+        
+        ws7.setEmployeenumber(uploadquestion.getEmployeenumber());
+        ws7.setQuestion_id(uploadquestion.getQn8().getQuestion_id());
+        ws7.setQuiz_id(uploadquestion.getQuiz_id());
+        ws7.setAnswer(uploadquestion.getQn8().getCorrectAnswer());
+        
+        dao.insert(ws7);
+        
+         Writer_sAnswer ws8 = new Writer_sAnswer();
+        
+        ws8.setEmployeenumber(uploadquestion.getEmployeenumber());
+        ws8.setQuestion_id(uploadquestion.getQn9().getQuestion_id());
+        ws8.setQuiz_id(uploadquestion.getQuiz_id());
+        ws8.setAnswer(uploadquestion.getQn9().getCorrectAnswer());
+        
+        dao.insert(ws8);
+        
+         Writer_sAnswer ws9 = new Writer_sAnswer();
+        
+        ws9.setEmployeenumber(uploadquestion.getEmployeenumber());
+        ws9.setQuestion_id(uploadquestion.getQn10().getQuestion_id());
+        ws9.setQuiz_id(uploadquestion.getQuiz_id());
+        ws9.setAnswer(uploadquestion.getQn10().getCorrectAnswer());
+        
+        dao.insert(ws9);
+        
+        
+	//return dao.insert(user);
+	return 0;	
+}
+   
+//
+//    @PUT
+//    @Path("/saveWriter_sAnswer/")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public int updateWriter_sAnswer(Writer_sAnswer writer_sAnswer) {
+//        Writer_sAnswerDAO dao = new Writer_sAnswerDAO();
+//
+//        return 0;
+//
+//    }
+
+//    @POST
+//    @Path("/saveWriter_sAnswer/")
+//    @Consumes(MediaType.APPLICATION_JSON)
+//    @Produces(MediaType.APPLICATION_JSON)
+//    public int saveWriter_sAnswer(AnswersRoot writer_sAnswer) {
+//
+//        
+//        
+//        
+//        
+//        int i = 0;
+//        Writer_sAnswerDAO dao = new Writer_sAnswerDAO();
+//
+//        Writer_sAnswer qu = new Writer_sAnswer();
+//        qu.setQuestion_id(1);
+//        qu.setAnswer(writer_sAnswer.getQn1().getAnswer());
+//
+//        Writer_sAnswer qu2 = new Writer_sAnswer();
+//        qu2.setQuestion_id(2);
+//        qu2.setAnswer(writer_sAnswer.getQn2().getAnswer());
+//
+//        Writer_sAnswer qu3 = new Writer_sAnswer();
+//        qu3.setQuestion_id(3);
+//        qu3.setAnswer(writer_sAnswer.getQn3().getAnswer());
+//
+//        Writer_sAnswer qu4 = new Writer_sAnswer();
+//        qu4.setQuestion_id(4);
+//        qu4.setAnswer(writer_sAnswer.getQn4().getAnswer());
+//
+//        Writer_sAnswer qu5 = new Writer_sAnswer();
+//        qu5.setQuestion_id(5);
+//        qu5.setAnswer(writer_sAnswer.getQn5().getAnswer());
+//
+//        Writer_sAnswer qu6 = new Writer_sAnswer();
+//        qu6.setQuestion_id(6);
+//        qu6.setAnswer(writer_sAnswer.getQn6().getAnswer());
+//
+//        Writer_sAnswer qu7 = new Writer_sAnswer();
+//        qu7.setQuestion_id(7);
+//        qu7.setAnswer(writer_sAnswer.getQn7().getAnswer());
+//
+//        Writer_sAnswer qu8 = new Writer_sAnswer();
+//        qu8.setQuestion_id(8);
+//        qu8.setAnswer(writer_sAnswer.getQn8().getAnswer());
+//
+//        Writer_sAnswer qu9 = new Writer_sAnswer();
+//        qu9.setQuestion_id(9);
+//        qu9.setAnswer(writer_sAnswer.getQn9().getAnswer());
+//
+//        Writer_sAnswer qu10 = new Writer_sAnswer();
+//        qu10.setQuestion_id(10);
+//        qu10.setAnswer(writer_sAnswer.getQn10().getAnswer());
+//
+//        dao.insert(qu);
+//        dao.insert(qu2);
+//        dao.insert(qu3);
+//        dao.insert(qu4);
+//        dao.insert(qu5);
+//        dao.insert(qu6);
+//        dao.insert(qu7);
+//        dao.insert(qu8);
+//        dao.insert(qu9);
+//        return dao.insert(qu10);
+//
+////	System.out.println("You have asked the following  + " + uploadquestion.getQn1().getActualQuestioin());
+////	return 1211111;	
+//    }
+
+}

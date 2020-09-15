@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8" />
+ 
+<title> HTML5 page </title>
+<style type="text/css">
+ input:checked + label{ font-weight: bold; color: white; background-color: red; }
+</style>
+ 
+</head>
+<body>
+<form>
+  <input type="radio" id="m" name="gender" value="male">
+  <label for="m">male</label>
+  <input type="radio" id="f" name="gender" value="female">
+  <label for="f">female</label><p>
+ 
+  <label for="b0"> <input type="radio" id="b0" name="rbtnStatus" value="0"> 0 </label>
+  <label for="b1"> <input type="radio" id="b1" name="rbtnStatus" value="1"> 1 </label>
+  <label for="b2"> <input type="radio" id="b2" name="rbtnStatus" value="2"> 2 </label>
+  <label for="b3"> <input type="radio" id="b3" name="rbtnStatus" value="3"> 3 </label>
+  <label for="b4"> <input type="radio" id="b4" name="rbtnStatus" value="4"> 4 </label>
+  <label for="b5"> <input type="radio" id="b5" name="rbtnStatus" value="5"> 5 </label><br>
+  <label for="b6"> <input type="radio" id="b6" name="rbtnStatus" value="6"> 6 </label>
+  <label for="b7"> <input type="radio" id="b7" name="rbtnStatus" value="7"> 7 </label>
+  <label for="b8"> <input type="radio" id="b8" name="rbtnStatus" value="8"> 8 </label>
+  <label for="b9"> <input type="radio" id="b9" name="rbtnStatus" value="9"> 9 </label>
+  <label for="b10"> <input type="radio" id="b10" name="rbtnStatus" value="10"> 10 </label>
+  <label for="b11"> <input type="radio" id="b11" name="rbtnStatus" value="11"> 11 </label><br>
+ 
+</form>
+<button onclick="rbtnStatus('gender')">Gender Status</button>
+<button onclick="rbtnStatus('rbtnStatus')">Radio Status</button>
+ 
+<script type="text/javascript">
+function rbtnStatus(elemName) {
+  var sel = document.getElementsByName(elemName);
+  var fnd = -1;
+  for (var i=0; i<sel.length; i++) { if (sel[i].checked) { fnd = i; } }
+  if (fnd == -1) { alert('No selection made'); }
+            else { alert('Selected: '+fnd+'\nValue: '+sel[fnd].value); }
+}
+</script>
+ 
+</body>
+</html>

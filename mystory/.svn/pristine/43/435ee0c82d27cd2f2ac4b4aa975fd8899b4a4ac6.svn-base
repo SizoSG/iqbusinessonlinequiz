@@ -1,0 +1,223 @@
+package za.co.sita.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+import za.co.sita.quiz.dto.Quizze;
+
+import za.co.sita.quiz.dto.Uploadquestion;
+import za.co.sita.util.MyConnect;
+
+public class UploadquestionDAO {
+	
+	
+	public static void  main(String[] asss) {
+		
+		UploadquestionDAO mmmm =  new UploadquestionDAO();
+	
+	Uploadquestion add = new Uploadquestion();
+	Uploadquestion update = new Uploadquestion();
+	
+	//add.setQuestionId(3);
+	add.setQuiz_id(1);
+	add.setActual_question("What does my xxxxxx mean?");
+	add.setChoice1("Shilinge");
+	add.setChoice2("Sizo");
+	add.setChoice3("Thabang");
+	add.setChoice4("Thobani");
+	add.setCorrect_Answer("Sizo");
+	
+	
+	
+	update.setQuestionId(1);
+	update.setActual_question("What isxxxsss my name?111");
+	update.setChoice1("Help1111");
+	update.setChoice2("Lov1e11");
+	update.setChoice3("di444e");
+	update.setChoice4("Thob744ani");
+	update.setCorrect_Answer("He444lp");
+	
+	mmmm.update(update);
+	
+	mmmm.insert(add);
+	
+}
+
+	
+	
+	
+	
+	//=========================================EXECUTE INSERT========================================================	
+		public int insert(Uploadquestion uploadquestion) {
+			
+			try {
+				PreparedStatement stmt = new MyConnect().Connect().prepareStatement("INSERT INTO uploadquestions (question_id, Actual_Question, Choice1, Choice2, Choice3, Choice4, Correct_Answer, Quiz_id ) VALUES (?,?,?,?,?,?,?,?)");
+				stmt.setInt(1, uploadquestion.getQuestionId());
+				stmt.setString(2, uploadquestion.getActual_question());
+				stmt.setString(3,uploadquestion.getChoice1());
+				stmt.setString(4, uploadquestion.getChoice2());
+				stmt.setString(5, uploadquestion.getChoice3());
+				stmt.setString(6, uploadquestion.getChoice4());
+				stmt.setString(7, uploadquestion.getCorrect_Answer());
+                                stmt.setInt(8, uploadquestion.getQuiz_id() );
+
+				
+				 return stmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+			return 0;
+		}
+			
+                
+             //=========================================EXECUTE SELECT======================================================   
+                
+           public  List<Uploadquestion> getUploaded(int quizid){
+               
+               List<Uploadquestion> list = new ArrayList<Uploadquestion>();
+               
+               
+                try {
+            PreparedStatement stmt = new MyConnect().Connect().prepareStatement("SELECT * FROM uploadquestions where quiz_id = ?");
+            stmt.setInt(1, quizid);
+
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                Uploadquestion  upload = new Uploadquestion();
+                upload.setActual_question(rs.getString("Actual_Question"));
+                upload.setChoice1(rs.getString("Choice1"));
+                upload.setChoice2(rs.getString("Choice2"));
+                upload.setChoice3(rs.getString("Choice3"));
+                upload.setChoice4(rs.getString("Choice4"));
+                upload.setQuestionId(rs.getInt("question_id"));
+                list.add(upload);
+                
+            
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+            return list;    
+               
+           }       
+			
+		
+		//=========================================EXECUTE UPDATE======================================================	
+		
+	public int update(Uploadquestion uploadquestion) {
+			
+			try {
+				PreparedStatement stmt = new MyConnect().Connect().prepareStatement("UPDATE uploadquestions SET Actual_Question=?, Choice1=?, Choice2=?, Choice3=?, Choice4=?, Correct_Answer=? WHERE question_id=?");
+			
+				
+				stmt.setString(1, uploadquestion.getActual_question());
+				stmt.setString(2,uploadquestion.getChoice1());
+				stmt.setString(3, uploadquestion.getChoice2());
+				stmt.setString(4, uploadquestion.getChoice3());
+				stmt.setString(5, uploadquestion.getChoice4());
+				stmt.setString(6, uploadquestion.getCorrect_Answer());
+				stmt.setInt(7, uploadquestion.getQuestionId() );
+				
+				return stmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+
+
+			return 0;
+				
+			
+		}
+	
+	
+	//=========================================EXECUTE SELECT======================================================	
+	
+	
+		public int select(Uploadquestion uploadquestion) {
+			
+			try {
+				PreparedStatement stmt = new MyConnect().Connect().prepareStatement("SELECT* FROM uploadquestions");
+				
+				return stmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+
+			return 0;	
+		}
+		
+		
+		//=========================================EXECUTE DELETE======================================================
+		
+		public int delete(Uploadquestion uploadquestion) {
+			
+			try {
+				PreparedStatement stmt = new MyConnect().Connect().prepareStatement("DELETE FROM uploadquestions WHERE quiz_id = ?");
+		                stmt.setInt(1, uploadquestion.getQuiz_id() );
+                                
+			return 	 stmt.executeUpdate();
+				
+                        
+                        
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+
+			return 0;
+				
+			
+		}
+
+                    public int deletequiz(int quiz_id ) {
+			
+			try {
+				PreparedStatement stmt = new MyConnect().Connect().prepareStatement("DELETE FROM quizzes WHERE quiz_id = ? ");
+		                stmt.setInt(1, quiz_id );
+                                
+				return stmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+
+			return 0;
+				
+			
+		}
+		
+	                    public int deleteanswer(int quiz_id ) {
+			
+			try {
+				PreparedStatement stmt = new MyConnect().Connect().prepareStatement("DELETE FROM writers_answers WHERE quiz_id = ? ");
+		                stmt.setInt(1, quiz_id );
+                                
+				return stmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+
+			return 0;
+				
+			
+		}
+	
+	
+
+}

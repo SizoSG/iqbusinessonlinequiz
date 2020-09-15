@@ -1,0 +1,50 @@
+package za.co.sita.quiz.dto;
+
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the quizzes database table.
+ * 
+ */
+@Entity
+@Table(name="quizzes")
+@NamedQuery(name="Quizze.findAll", query="SELECT q FROM Quizze q")
+public class Quizze implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+	@Column(name="quiz_id")
+	private int quiz_id;
+        private String employeenumber;
+	private String quiz_name;
+
+    public String getEmployeenumber() {
+        return employeenumber;
+    }
+
+    public void setEmployeenumber(String employeenumber) {
+        this.employeenumber = employeenumber;
+    }
+
+	public Quizze() {
+	}
+
+	public int getQuiz_id() {
+		return this.quiz_id;
+	}
+
+	public void setQuiz_id(int quiz_id) {
+		this.quiz_id = quiz_id;
+	}
+
+	public String getQuiz_name() {
+		return this.quiz_name;
+	}
+
+	public void setQuiz_name(String quiz_name) {
+		this.quiz_name = quiz_name;
+	}
+
+}

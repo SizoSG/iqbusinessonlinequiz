@@ -1,0 +1,49 @@
+package za.co.sita.quiz.dto;
+import java.io.Serializable;
+import javax.persistence.*;
+
+
+/**
+ * The persistent class for the correct_answers database table.
+ * 
+ */
+@Entity
+@NamedQuery(name="Admin.findAll", query="SELECT a FROM Admin a")
+public class CorrectAnswers implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+	@Id
+
+	private int question_id;
+
+	public int getQuestion_id() {
+		return question_id;
+	}
+
+	public void setQuestion_id(int question_id) {
+		this.question_id = question_id;
+	}
+
+	public int getQuiz_id() {
+		return quiz_id;
+	}
+
+	public void setQuiz_id(int quiz_id) {
+		this.quiz_id = quiz_id;
+	}
+
+	public String getAnswer() {
+		return answer;
+	}
+
+	public void setAnswer(String answer) {
+		this.answer = answer;
+	}
+
+	private int quiz_id;
+
+	private String answer;
+
+
+
+}

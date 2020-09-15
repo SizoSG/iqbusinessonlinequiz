@@ -1,0 +1,362 @@
+package za.co.sita.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+
+import za.co.sita.quiz.dto.Result;
+import za.co.sita.quiz.dto.RightAndWrong;
+import za.co.sita.util.MyConnect;
+
+public class ResultDAO {
+	
+	
+	
+public static void  main(String[] asss) {
+		
+		ResultDAO mmmm =  new ResultDAO();
+		
+		Result add = new Result();
+		
+                
+                System.out.println("count is " + mmmm.getResults(99, "12345"));
+		
+//		add.setScore(10);
+//		add.setQuiz_id(1);
+//		add.setEmployee_number("12345667");
+//		
+//			mmmm.insert(add);
+//        
+	
+		
+	
+		
+	}
+
+	
+	//=========================================EXECUTE INSERT========================================================	
+//		public int insert(Result result) {
+//			
+//			try {
+//				PreparedStatement stmt = new MyConnect().Connect().prepareStatement("INSERT INTO results (employee_number,quiz_id,score ) VALUES (?,?,?)");
+//				stmt.setLong(1, result.getEmployeeNumber());
+//				stmt.setLong(2, result.getQuizId());
+//				stmt.setLong(3, result.getScore());
+//				
+//				 return stmt.executeUpdate();
+//				
+//			} catch (SQLException e) {
+//				
+//				e.printStackTrace();
+//			}
+//			
+//			return 0;
+//		}
+//			
+			
+		
+		//=========================================EXECUTE UPDATE======================================================	
+		
+	public int update(Result result) {
+			
+			try {
+				PreparedStatement stmt = new MyConnect().Connect().prepareStatement("UPDATE results SET score=? WHERE quiz_id=?");
+				
+				stmt.setInt(1, result.getScore());
+				stmt.setInt(2, result.getQuiz_id());
+				
+				return stmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+
+
+			return 0;
+				
+			
+		}
+
+	//=========================================EXECUTE SELECT======================================================	
+	
+	
+	public int select(Result result) {
+		
+		try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("SELECT* FROM results");
+			
+			return stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+
+		return 0;	
+		
+	}
+
+	
+	//=========================================EXECUTE DELETE======================================================
+	
+	public int getResults(int  quiz_id, String empno) {
+		
+            System.out.println("id " + quiz_id + "   " + empno );
+		try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("select count(1) as \"count\" from quizzes qu, uploadquestions uq, writers_answers wa\n" +
+"where qu.quiz_id = uq.Quiz_id\n" +
+"and qu.quiz_id = wa.Quiz_id\n" +
+"and wa.question_id = uq.question_id\n" +
+"and wa.employee_number = ? \n" +                                
+"and wa.Answer = uq.Correct_Answer\n" +
+"and qu.quiz_id = ? ;");
+			
+			
+                        stmt.setString(1, empno);
+			stmt.setInt(2, quiz_id);
+                        
+			ResultSet rs = stmt.executeQuery();
+                        if(rs.next()){
+			return rs.getInt("count");
+                        }
+                        
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+
+		return 0;
+			
+		
+	}
+	
+        
+        
+        public int insert(Result result) {
+			
+            
+                     int score = getResults(result.getQuiz_id(), result.getEmployee_number());
+                     
+                     
+                     System.out.println("the score is " + score * 10);
+                     
+			try {
+				PreparedStatement stmt = new MyConnect().Connect().prepareStatement("INSERT INTO results (quiz_id,employee_number,score ) VALUES (?,?,?)");
+				stmt.setInt(1, result.getQuiz_id());
+                                stmt.setString(2, result.getEmployee_number());
+                                stmt.setInt(3, score * 10);
+                                
+                        
+				
+				 return stmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+			return 0;
+		}
+		
+        
+        
+        
+        
+        
+        public int select1(Result result) {
+		
+		try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("SELECT* FROM results WHERE quiz_id =? ");
+			
+			return stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+
+		return 0;	
+		
+	}
+        
+        
+        public List<Result> getListResults(int  quiz_id){
+        List<Result> no = new ArrayList<Result> ();
+                
+        try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("SELECT* FROM results WHERE quiz_id =? ");
+			
+			stmt.setInt(1, quiz_id);
+	
+			
+			ResultSet rs = stmt.executeQuery();
+                        
+			while(rs.next()){
+                           Result rw = new Result(); 
+                          
+                           rw.setEmployee_number(rs.getString("employee_number"));
+                            rw.setQuiz_id(rs.getInt("Quiz_id"));
+                            rw.setScore(rs.getInt("score"));
+                            
+                           no.add(rw);
+                        }
+                        
+                        
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+
+		return no;
+	}
+
+        
+        
+        
+        
+        
+        
+        public List<RightAndWrong> getRightResults(int  quiz_id) {
+		List<RightAndWrong> lios = new ArrayList<RightAndWrong>();
+		try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("select uq.Quiz_id, Quiz_name, wa.Answer as \"writeranswer\", Actual_Question, uq.Correct_Answer   from quizzes qu, uploadquestions uq, writers_answers wa\n" +
+"where qu.quiz_id = uq.Quiz_id\n" +
+"and qu.quiz_id = wa.Quiz_id\n" +
+"and wa.question_id = uq.question_id\n" +
+"and wa.Answer = uq.Correct_Answer\n" +
+"and qu.quiz_id = ? ;");
+			
+			stmt.setInt(1, quiz_id);
+	
+			
+			ResultSet rs = stmt.executeQuery();
+                        
+			while(rs.next()){
+                           RightAndWrong rw = new RightAndWrong(); 
+                            rw.setActual_question(rs.getString("Actual_Question"));
+                            rw.setUserAnswer(rs.getInt("writeranswer"));
+                            rw.setCorrect_Answer(rs.getString("Correct_Answer"));
+                            rw.setQuiz_id(rs.getInt("Quiz_id"));
+                            rw.setQuiz_name(rs.getString("Quiz_name"));
+                           lios.add(rw);
+                        }
+                        
+                        
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+
+		return lios;
+	}
+	
+        
+         public List<RightAndWrong> getWrongResults(int  quiz_id) {
+		List<RightAndWrong> lios = new ArrayList<RightAndWrong>();
+		try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("select uq.Quiz_id, Quiz_name, wa.Answer as \"writeranswer\", Actual_Question, uq.Correct_Answer   from quizzes qu, uploadquestions uq, writers_answers wa\n" +
+"where qu.quiz_id = uq.Quiz_id\n" +
+"and qu.quiz_id = wa.Quiz_id\n" +
+"and wa.question_id = uq.question_id\n" +
+"and wa.Answer <> uq.Correct_Answer\n" +
+"and qu.quiz_id = ? ;");
+			
+			stmt.setInt(1, quiz_id);
+	
+			
+			ResultSet rs = stmt.executeQuery();
+                        
+			while(rs.next()){
+                           RightAndWrong rw = new RightAndWrong(); 
+                            rw.setActual_question(rs.getString("Actual_Question"));
+                            rw.setUserAnswer(rs.getInt("writeranswer"));
+                            rw.setCorrect_Answer(rs.getString("Correct_Answer"));
+                            rw.setQuiz_id(rs.getInt("Quiz_id"));
+                            rw.setQuiz_name(rs.getString("Quiz_name"));
+                           lios.add(rw);
+                        }
+                        
+                        
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+		return lios;
+		
+	}
+	
+      public List<Result> getAllResults() {   
+          
+          List<Result> lios = new ArrayList<Result>();
+          
+          try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("select * from results ; ");
+		
+			ResultSet rs = stmt.executeQuery();
+                        
+			while(rs.next()){
+                           Result rw = new Result(); 
+                            rw.setEmployee_number(rs.getString("employee_number"));
+                            rw.setQuiz_id(rs.getInt("Quiz_id"));
+                            rw.setScore(rs.getInt("score"));
+                            
+                           lios.add(rw);
+                        }
+                        
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+		return lios;
+          
+      }
+        
+      public int getFailed(int quiz_id) {
+		
+           
+		try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("SELECT count(1) FROM onlinequiz.results where score < 50 and quiz_id = ? ;");
+			
+                        stmt.setInt(1, quiz_id);
+                        ResultSet rs = stmt.executeQuery();
+                        if(rs.next()){
+			return rs.getInt("count");
+                        }
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return 0;
+			
+	}
+	
+      
+     public int getPassed(int quiz_id ) {
+		try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("SELECT count(1) FROM onlinequiz.results where score >= 50 and quiz_id = ? ;");
+			stmt.setInt(1, quiz_id);
+                        
+                        ResultSet rs = stmt.executeQuery();
+                        if(rs.next()){
+			return rs.getInt("count");
+                        }
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+		return 0;
+			
+	}
+		
+}

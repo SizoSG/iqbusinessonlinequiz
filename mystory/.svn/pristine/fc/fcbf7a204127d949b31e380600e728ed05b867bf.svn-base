@@ -1,0 +1,230 @@
+package za.co.sita.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
+
+import za.co.sita.quiz.dto.Quizze;
+
+import za.co.sita.util.MyConnect;
+
+public class QuizzeDAO {
+
+    public static void main(String[] asss) {
+
+        QuizzeDAO mmmm = new QuizzeDAO();
+        
+        
+        
+//        for(int i= 0; i < mmmm.getallquizzes().size(); i++ ){
+//            
+//            System.out.println("this is hildas for loop " + mmmm.getallquizzes().get(i).getQuiz_name());
+//
+//        }
+//        
+//        for (Quizze qu : mmmm.getallquizzes()){
+//            System.out.println("this is Winners for loop   " + qu.getQuiz_name());
+//            
+//        }
+       
+//        Quizze add = new Quizze();
+//
+//        add.setEmployeenumber("10111");
+//        add.setQuiz_name("SA Sucrks");
+
+ //       System.out.println("net beans sucks " + mmmm.insert(add));
+
+//		Quizze update = new Quizze();
+//		Quizze delete = new Quizze();
+//		
+//		add.setQuiz_name("SOAqq");
+//		delete.setQuiz_name("SOAqq");
+//			mmmm.insert(add);
+//            mmmm.delete(delete);
+//		
+//		
+//		update.setQuiz_id(1);
+//		update.setQuiz_name("JAVA");
+//		
+//	mmmm.update(update);
+    }
+
+    //=========================================EXECUTE INSERT========================================================	
+    public Quizze insert(Quizze quizze) {
+
+        try {
+            PreparedStatement stmt = new MyConnect().Connect().prepareStatement("INSERT INTO quizzes (quiz_id, Quiz_name, employee_number) VALUES (?,?,?)", PreparedStatement.RETURN_GENERATED_KEYS);
+
+            stmt.setInt(1, quizze.getQuiz_id());
+            stmt.setString(2, quizze.getQuiz_name());
+            stmt.setString(3, quizze.getEmployeenumber());
+
+            if (stmt.executeUpdate() == 1) {
+                ResultSet rs = stmt.getGeneratedKeys();
+                if (rs.next()) {
+                    //set id 
+                    quizze.setQuiz_id(rs.getInt(1));
+                    //read new object
+                    return select(quizze);
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        //return quiz without new id?
+        return quizze;
+    }
+    
+ //=========================================EXECUTE SELECT======================================================	
+    public Quizze select(Quizze quizze) {
+
+        Quizze quiiiz = null;
+
+        try {
+            PreparedStatement stmt = new MyConnect().Connect().prepareStatement("SELECT * FROM quizzes where quiz_id = ?");
+            stmt.setInt(1, quizze.getQuiz_id());
+
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                quiiiz = new Quizze();
+                quiiiz.setQuiz_id(quizze.getQuiz_id());
+                quiiiz.setEmployeenumber(rs.getString("employee_number"));
+                quiiiz.setQuiz_name(rs.getString("Quiz_name"));
+                return quiiiz;
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+        return quizze;
+
+    }
+    //=========================================EXECUTE UPDATE======================================================	
+    public int update(Quizze quizze) {
+
+        try {
+            PreparedStatement stmt = new MyConnect().Connect().prepareStatement("UPDATE quizzes SET Quiz_name=? WHERE quiz_id=?");
+
+            stmt.setString(1, quizze.getQuiz_name());
+            stmt.setLong(2, quizze.getQuiz_id());
+
+            return stmt.executeUpdate();
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+        return 0;
+
+    }
+
+   
+
+    //=========================================EXECUTE DELETE======================================================
+    public int delete(Quizze quizze) {
+
+        try {
+            PreparedStatement stmt = new MyConnect().Connect().prepareStatement("DELETE FROM quizzes WHERE Quiz_name=?");
+
+            stmt.setString(1, quizze.getQuiz_name());
+
+            return stmt.executeUpdate();
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+        return 0;
+
+    }
+
+    public int getprimarykey() {
+
+        try {
+            PreparedStatement stmt = new MyConnect().Connect().prepareStatement("select LAST_INSERT_ID()");
+
+            ResultSet rs = stmt.executeQuery();
+            if (rs.next()) {
+
+                return rs.getInt(1);
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+        return 0;
+
+    }
+    
+    
+    public List<Quizze> getallquizzes(String empno){
+        
+       List<Quizze> list = new ArrayList<Quizze>();
+        
+          Quizze quiiiz = null;
+
+        try {
+            PreparedStatement stmt = new MyConnect().Connect().prepareStatement("SELECT quizzes.* FROM quizzes where quiz_id not in (select distinct(quiz_id) from results where employee_number = ? ); ");
+            
+            stmt.setString(1,empno);
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                quiiiz = new Quizze();
+                quiiiz.setQuiz_id(rs.getInt("quiz_id"));
+                quiiiz.setEmployeenumber(rs.getString("employee_number"));
+                quiiiz.setQuiz_name(rs.getString("Quiz_name"));
+               list.add(quiiiz);
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+        return list;
+
+ 
+    }
+
+    
+    public List<Quizze> getallquizzes(){
+        
+       List<Quizze> list = new ArrayList<Quizze>();
+        
+          Quizze quiiiz = null;
+
+        try {
+            PreparedStatement stmt = new MyConnect().Connect().prepareStatement("SELECT * FROM quizzes ; ");
+            
+            ResultSet rs = stmt.executeQuery();
+
+            while (rs.next()) {
+                quiiiz = new Quizze();
+                quiiiz.setQuiz_id(rs.getInt("quiz_id"));
+                quiiiz.setEmployeenumber(rs.getString("employee_number"));
+                quiiiz.setQuiz_name(rs.getString("Quiz_name"));
+               list.add(quiiiz);
+            }
+
+        } catch (SQLException e) {
+
+            e.printStackTrace();
+        }
+
+        return list;
+
+ 
+    }
+
+    
+}

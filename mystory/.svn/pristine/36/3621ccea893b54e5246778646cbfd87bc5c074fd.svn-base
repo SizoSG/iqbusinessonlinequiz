@@ -1,0 +1,62 @@
+package za.co.sita.quiz.dto;
+
+import java.io.Serializable;
+
+
+
+/**
+ * The persistent class for the writer's_answers database table.
+ * 
+ */
+
+public class Writer_sAnswer implements Serializable {
+	private static final long serialVersionUID = 1L;
+
+
+	private int quiz_id;
+	
+	private int question_id;
+	
+	private String employeenumber;
+	
+	private String Answer;
+
+    public String getAnswer() {
+        return Answer;
+    }
+
+    public void setAnswer(String Answer) {
+        this.Answer = Answer;
+    }
+
+   
+	public int getQuiz_id() {
+		return quiz_id;
+	}
+
+	public void setQuiz_id(int quiz_id) {
+		this.quiz_id = quiz_id;
+	}
+
+	
+
+	public int getQuestion_id() {
+		return question_id;
+	}
+
+	public void setQuestion_id(int question_id) {
+		this.question_id = question_id;
+	}
+
+    public String getEmployeenumber() {
+        return employeenumber;
+    }
+
+    public void setEmployeenumber(String employeenumber) {
+        this.employeenumber = employeenumber;
+    }
+
+	
+
+	
+}

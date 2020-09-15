@@ -1,0 +1,87 @@
+<meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="author" content="">
+  <title>Tables</title>
+  <!-- Bootstrap core CSS-->
+  <link href="vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+  <!-- Custom fonts for this template-->
+  <link href="vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+  <!-- Page level plugin CSS-->
+  <link href="vendor/datatables/dataTables.bootstrap4.css" rel="stylesheet">
+  <!-- Custom styles for this template-->
+  <link href="css/sb-admin.css" rel="stylesheet">
+<ng-form name="quizNameForm">
+    <div class="container">
+        <header>
+            <h1>Oline<span>Quiz Rules</span></h1>
+            <nav class="codrops-demos">
+                <br>
+                </br>
+                 <div class="form-group ">
+    
+           <div class="card mb-3">
+        <div class="card-header">
+          <i class="fa fa-table"></i><strong>List of Results</strong></div>
+        <div class="card-body">
+          <div class="table-responsive">
+            <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
+          
+             <th><strong>Employee Number</strong></th>
+                  <th><strong>Quiz ID</strong></th> 
+                   <th><strong>Score</strong></th>
+                  
+             <tr ng-repeat="x in resultslist">
+              <td>{{ x.employee_number }}</td>
+              <td>{{ x.quiz_id }}</td>
+              <td>{{ x.score }}</td>
+     
+            </tr>
+                        
+          
+</table>
+              
+             
+          </div>
+        </div>
+        <div class="card-footer small text-muted">Updated</div>
+        
+      </div>
+    </div>
+                
+              <br>
+                </br>
+                <span><strong> Failed: <label type="text"  ng-model="result.fail" > {{result.fail}}<br></strong></span>
+                <br>
+                </br>
+                 <span><strong> Passed: <label type="text"  ng-model="result.pass" ><br> </strong></span>
+                <br>
+                 </br>
+                 
+                  <div style="overflow:auto;">
+        <div style="float:right;">
+            <button type="button" ng-click="getPassed()">Summary</button>
+        </div>
+    </div>       
+                
+            </nav> 
+        </header>
+    </div>
+    <div style="overflow:auto;">
+        <div style="float:right;">
+            <button type="button" ng-click="showPage('admindashboard');">Back</button>
+        </div>
+    </div>
+<script src="vendor/jquery/jquery.min.js"></script>
+    <script src="vendor/bootstrap/js/bootstrap.bundle.min.js"></script>
+    <!-- Core plugin JavaScript-->
+    <script src="vendor/jquery-easing/jquery.easing.min.js"></script>
+    <!-- Page level plugin JavaScript-->
+    <script src="vendor/datatables/jquery.dataTables.js"></script>
+    <script src="vendor/datatables/dataTables.bootstrap4.js"></script>
+    <!-- Custom scripts for all pages-->
+    <script src="js/sb-admin.min.js"></script>
+    <!-- Custom scripts for this page-->
+    <script src="js/sb-admin-datatables.min.js"></script>
+</ng-form>

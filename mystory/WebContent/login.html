@@ -1,0 +1,61 @@
+<div class="container"> 
+    <header>
+        <h1>
+            Online<span>Quiz</span> 
+        </h1>
+        <nav class="codrops-demos">
+           
+        </nav>
+    </header>
+
+    <section>
+        <div id="container_demo">
+            <!-- hidden anchor to stop jump http://www.css3create.com/Astuce-Empecher-le-scroll-avec-l-utilisation-de-target#wrap4  -->
+            <a class="hiddenanchor" id="toregister"></a> <a class="hiddenanchor" id="tologin"></a>
+            <div id="wrapper">
+
+                <div id="login" class="animate form">
+                    <form autocomplete="on" name="loginform" id="loginform" >
+
+                        <div class="alert alert-danger" role="alert" ng-show="message">
+                            {{message}}
+                        </div>
+                        <ng-form name="logForm">
+
+                            <h1>Log in</h1>
+                            <p>
+
+                                <label for="username" class="uname" data-icon="u"> Your
+                                    Username </label> <input required type="text" placeholder="ID Number"
+                                                         ng-model="user.id_number" />
+                            </p>
+                            <p>
+                                <label for="password" class="youpasswd" data-icon="p">
+                                    Your Password </label> <input 
+                                    required="required" type="password" placeholder="eg. X8df!90EO"
+                                    ng-model="user.password" />
+                            </p>
+                            <p class="keeplogin">
+                                <input type="checkbox" name="loginkeeping" id="loginkeeping"
+                                       value="loginkeeping" /> <label for="loginkeeping">Keep
+                                    me logged in</label> <br> <a class="d-block small"
+                                                             href="user-forgot-password.html">Forgot Password?</a> </br>
+                            </p>
+
+                            <p class="login button">
+                                <input id="sizo" type="submit" value="Login" ng-click="login()" />
+
+                            </p>
+                            <p class="change_link">
+                                Not a member yet ? <a ng-click="showPage('register');" class="to_register">Register</a>
+                            </p>
+
+                        </ng-form>
+
+                    </form>
+
+                </div>
+            </div>
+        </div>
+    </section>
+</div>

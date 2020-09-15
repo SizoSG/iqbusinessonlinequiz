@@ -1,0 +1,135 @@
+package za.co.sita.dao;
+
+import java.sql.PreparedStatement;
+import java.sql.SQLException;
+
+import za.co.sita.quiz.dto.Writer_sAnswer;
+import za.co.sita.util.MyConnect;
+
+
+public class Writer_sAnswerDAO {
+
+	
+	public static void  main(String[] asss) {
+		
+		Writer_sAnswerDAO mmmm =  new Writer_sAnswerDAO();
+		
+		Writer_sAnswer add = new Writer_sAnswer();
+		
+		add.setEmployeenumber("12345");
+		add.setQuiz_id(20);
+		add.setQuestion_id(5);
+		add.setAnswer("3");
+		
+			mmmm.insert(add);
+        
+	
+	}
+
+	
+	//=========================================EXECUTE INSERT========================================================	
+		public int insert(Writer_sAnswer writer_sAnswer) {
+			
+			try {
+				PreparedStatement stmt = new MyConnect().Connect().prepareStatement("INSERT INTO writers_answers (Quiz_id, question_id, employee_number, Answer) VALUES (?,?,?,?)");
+				stmt.setInt(1, writer_sAnswer.getQuiz_id());
+				stmt.setInt(2, writer_sAnswer.getQuestion_id());
+				stmt.setString (3, writer_sAnswer.getEmployeenumber());
+				stmt.setString (4, writer_sAnswer.getAnswer());
+	
+				 return stmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+			
+			return 0;
+		}
+		
+		
+		
+		
+		
+
+		//=========================================EXECUTE SELECT======================================================	
+		
+		
+		public int select(Writer_sAnswer writer_sAnswer) {
+			
+			try {
+				PreparedStatement stmt = new MyConnect().Connect().prepareStatement("SELECT* FROM writers_answers");
+				
+				return stmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+
+
+			return 0;	
+			
+		}
+                
+                
+
+			
+/*
+		//=========================================EXECUTE UPDATE======================================================	
+		
+	public int update(Writer_sAnswer writer_sAnswer) {
+			
+			try {
+				PreparedStatement stmt = new MyConnect().Connect().prepareStatement("UPDATE writer_sAnswers SET Quiz_name=? WHERE quiz_id=?");
+				
+				stmt.setString(1, writer_sAnswer.getQuiz_name());
+				stmt.setLong(2, writer_sAnswer.getQuizId());
+				
+				return stmt.executeUpdate();
+				
+			} catch (SQLException e) {
+				
+				e.printStackTrace();
+			}
+
+
+			return 0;
+				
+			
+		}
+
+
+	
+	//=========================================EXECUTE DELETE======================================================
+	
+	public int delete(Writer_sAnswer writer_sAnswer) {
+		
+		try {
+			PreparedStatement stmt = new MyConnect().Connect().prepareStatement("DELETE FROM writer_sAnswers WHERE Quiz_name=?");
+			
+			stmt.setLong(1, writer_sAnswer.getQuiz_id());
+	
+			
+			return stmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			
+			e.printStackTrace();
+		}
+
+
+		return 0;
+			
+		
+	}
+	
+*/	
+	
+}
+
+	
+	
+	
+	
+
