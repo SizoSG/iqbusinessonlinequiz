@@ -1,4 +1,5 @@
 # iqbusinessonlinequiz
+Clone the project
 
 To run this project:
 
